@@ -1,38 +1,85 @@
+/* Popup background and text color */
 body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f4f4f4;
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  input, button {
-    padding: 10px;
-    margin: 5px 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    background-color: #eaeaea;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  #timer-display {
-    font-size: 18px;
-    margin-top: 20px;
-    text-align: center;
-    font-weight: bold;
-    color: #333;
-  }
-  
+  background-color: #27374D;
+  color: #DDE6ED;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  width: 300px;
+}
+
+/* Heading styling */
+h1 {
+  text-align: center;
+  color: #DDE6ED;
+}
+
+/* List styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #9DB2BF;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #27374D;
+}
+
+/* Buttons styling */
+button {
+  background-color: #526D82;
+  color: #DDE6ED;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #9DB2BF;
+  color: #DDE6ED;
+}
+
+/* Input fields styling */
+input[type="url"], input[type="number"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #526D82;
+  border-radius: 4px;
+  background-color: #DDE6ED;
+  color: #27374D;
+}
+
+
+/* Timer display styling */
+#timer-display {
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #DDE6ED;
+}
+
+/* Delete button styling */
+.delete-btn {
+  background: #DDE6ED;
+  color: #27374D;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-top: 0;
+}
+
+.delete-btn:hover {
+  background: #526D82;
+  color: #DDE6ED;
+}

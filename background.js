@@ -19,6 +19,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ timerEnd: data.timerEnd || null });
     });
     return true; // Keep the messaging channel open for async response
+  } else if (message.action === 'stopBlocking') {
+    clearBlocking();
+    sendResponse({ status: 'Blocking stopped' });
   }
 });
 
@@ -46,12 +49,17 @@ function startBlocking(urls, duration) {
 }
 
 function unblockWebsites() {
+  clearBlocking();
+}
+
+function clearBlocking() {
   const ruleIdsToRemove = blockRules.map(rule => rule.id);
-  
+
   chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: ruleIdsToRemove
   }, () => {
     chrome.storage.sync.set({ timerEnd: null });
+    chrome.alarms.clear('unblockWebsites'); // Clear the alarm if stopping manually
     blockRules.length = 0; // Clear the in-memory blockRules
   });
 }
