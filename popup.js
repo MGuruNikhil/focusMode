@@ -38,6 +38,25 @@ document.getElementById('url-input').addEventListener('keydown', (event) => {
   }
 });
 
+document.getElementById('add-current-url').addEventListener('click', () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const currentUrl = tabs[0].url;
+    chrome.storage.sync.get(['blockedUrls'], (data) => {
+      const blockedUrls = data.blockedUrls || [];
+
+      // Check if the URL already exists in the list
+      if (!blockedUrls.includes(currentUrl)) {
+        blockedUrls.push(currentUrl);
+        chrome.storage.sync.set({ blockedUrls });
+        displayUrls(blockedUrls);
+      } else {
+        alert("This URL is already in the list.");
+        document.getElementById('add-current-url').disabled = true;
+      }
+    });
+  });
+});
+
 document.getElementById('start-timer').addEventListener('click', () => {
   const duration = parseInt(document.getElementById('duration').value, 10);
   chrome.storage.sync.get(['blockedUrls'], (data) => {
@@ -81,6 +100,7 @@ function removeUrl(index) {
         blockedUrls.splice(index, 1);
         chrome.storage.sync.set({ blockedUrls });
         displayUrls(blockedUrls); // Update the list
+        document.getElementById('add-current-url').disabled = false;
       });
     } else {
       alert("Cannot remove URLs while a session is active.");
@@ -94,6 +114,7 @@ function startBlocking(urls, duration) {
     startTimerDisplay(); // Start updating the timer display
     disableInputs(true); // Disable inputs during the focus session
     toggleStopButton(true); // Show stop button
+    document.getElementById('add-current-url').disabled = true;
   });
 }
 
@@ -159,6 +180,7 @@ function resetUI() {
   disableDeleteButtons(false); // Re-enable delete buttons
   document.getElementById('url-input').value = "";
   document.getElementById('duration').value = "";
+  document.getElementById('add-current-url').disabled = false;
 }
 
 function disableInputs(disable) {

@@ -47,6 +47,12 @@ button:hover {
   color: #DDE6ED;
 }
 
+button:disabled {
+  background-color: #9DB2BF;
+  color: #526D82;
+  cursor: not-allowed;
+}
+
 /* Input fields styling */
 input[type="url"], input[type="number"] {
   width: calc(100% - 22px);
