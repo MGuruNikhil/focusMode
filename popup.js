@@ -59,6 +59,10 @@ document.getElementById('add-current-url').addEventListener('click', () => {
 
 document.getElementById('start-timer').addEventListener('click', () => {
   const duration = parseInt(document.getElementById('duration').value, 10);
+  if (isNaN(duration) || duration <= 0) {
+    alert("Please enter a valid duration in minutes.");
+    return;
+  }
   chrome.storage.sync.get(['blockedUrls'], (data) => {
     const blockedUrls = data.blockedUrls || [];
     startBlocking(blockedUrls, duration);

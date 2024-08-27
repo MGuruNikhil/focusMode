@@ -89,3 +89,9 @@ input[type="url"], input[type="number"] {
   background: #526D82;
   color: #DDE6ED;
 }
+
+.startStop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
